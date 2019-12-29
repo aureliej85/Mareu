@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Maréu : gestionnaire de réunions</string>
+
+    <string-array name="liste_salles">
+        <item>Indigo</item>
+        <item>Fuschia</item>
+        <item>Sépia</item>
+        <item>Corail</item>
+        <item>Rubis</item>
+        <item>Jade</item>
+        <item>Mauve</item>
+        <item>Grège</item>
+        <item>Topaze</item>
+        <item>Noire</item>
+    </string-array>
+
+</resources>
