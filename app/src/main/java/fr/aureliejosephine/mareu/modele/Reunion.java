@@ -1,5 +1,7 @@
 package fr.aureliejosephine.mareu.modele;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 
 import fr.aureliejosephine.mareu.R;
@@ -11,6 +13,7 @@ public class Reunion {
     private String email;
     private String date;
     private String heure;
+    private int avatar;
 
 
     public Reunion(String lieu, String sujet, String email, String date, String heure) {
@@ -19,6 +22,15 @@ public class Reunion {
         this.email = email;
         this.date = date;
         this.heure = heure;
+    }
+
+    public Reunion(String lieu, String sujet, String email, String date, String heure, int avatar) {
+        this.lieu = lieu;
+        this.sujet = sujet;
+        this.email = email;
+        this.date = date;
+        this.heure = heure;
+        this.avatar = avatar;
     }
 
 
@@ -62,5 +74,11 @@ public class Reunion {
         this.heure = heure;
     }
 
+    public int getAvatar() {
+        return avatar;
+    }
 
+    public void setAvatar(int avatar) {
+        this.avatar = avatar;
+    }
 }

@@ -2,6 +2,7 @@ package fr.aureliejosephine.mareu;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -70,8 +71,48 @@ public class AddReunionActivity extends AppCompatActivity implements AdapterView
         String salle = nSalle.getSelectedItem().toString();
         String date = nCal.getText().toString();
         String heure = nHeure.getText().toString();
+        int avatar = R.drawable.indigo_lens_24dp;
 
-        mReunionService.addReunion(new Reunion(salle, sujet, emails, date, heure));
+        /*if(salle == "Indigo"){
+            avatar = R.drawable.indigo_lens_24dp;
+        }*/
+
+        switch(salle){
+            case "Indigo":
+                avatar = R.drawable.indigo_lens_24dp;
+                break;
+            case "Fuscia":
+                avatar = R.drawable.fuschia_lens_24dp;
+                break;
+            case "Sépia":
+                avatar = R.drawable.sepia_lens_24dp;
+                break;
+            case "Corail":
+                avatar = R.drawable.corail_lens_4dp;
+                break;
+            case "Rubis":
+                avatar = R.drawable.rubis_lens_24dp;
+                break;
+            case "Jade":
+                avatar = R.drawable.jade_lens_24dp;
+                break;
+            case "Mauve":
+                avatar = R.drawable.mauve_lens_24dp;
+                break;
+            case "Topaze":
+                avatar = R.drawable.topaze_lens_24dp;
+                break;
+            case "Grège":
+                avatar = R.drawable.grege_lens_24dp;
+                break;
+            case "Noire":
+                avatar = R.drawable.ic_lens_black_24dp;
+                break;
+        }
+
+
+        mReunionService.addReunion(new Reunion(salle, sujet, emails, date, heure, avatar));
+
 
         Toast toast = Toast.makeText(getApplicationContext(), "Réunion enregistrée !", Toast.LENGTH_SHORT);
         toast.show();

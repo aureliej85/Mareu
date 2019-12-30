@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import fr.aureliejosephine.mareu.services.ReunionService;
 import java.util.ArrayList;
 import java.util.List;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecyclerViewAdapter.ViewHolder> implements Filterable {
 
@@ -48,10 +50,10 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
         holder.mHeure.setText(reunion.getHeure());
         holder.mDate.setText(reunion.getDate());
 
-        /*Glide.with(holder.mNeighbourAvatar.getContext())
-                .load(neighbour.getAvatarUrl())
+        Glide.with(holder.mImage.getContext())
+                .load(reunion.getAvatar())
                 .apply(RequestOptions.circleCropTransform())
-                .into(holder.mNeighbourAvatar);*/
+                .into(holder.mImage);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
