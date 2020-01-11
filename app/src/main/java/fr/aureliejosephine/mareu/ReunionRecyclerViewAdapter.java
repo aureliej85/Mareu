@@ -1,6 +1,8 @@
 package fr.aureliejosephine.mareu;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,10 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.aureliejosephine.mareu.DI.DI;
 import fr.aureliejosephine.mareu.modele.Reunion;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +30,7 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
     private List<Reunion> listFull;
     private LayoutInflater mInflater;
     private ReunionService mReunionService;
+    private Context context;
 
 
     public ReunionRecyclerViewAdapter(Context context, List<Reunion> reunions ) {
@@ -36,6 +43,7 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_reunion, parent, false);
+        context = parent.getContext();
         return new ViewHolder(view);
     }
 
@@ -46,7 +54,7 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
 
         holder.mLieu.setText(reunion.getLieu());
         holder.mSujet.setText(reunion.getSujet());
-        holder.mEmail.setText(reunion.getEmail());
+        holder.mEmail.setText(reunion.getAddEmail().toString().replace("[", " ").replace("]", " ").replace(",", ""));
         holder.mHeure.setText(reunion.getHeure());
         holder.mDate.setText(reunion.getDate());
 
@@ -58,8 +66,28 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mReunionService.deleteReunion(reunion);
-                notifyDataSetChanged();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage(context.getString(R.string.confirm_delete));
+                builder.setCancelable(false);
+                builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mReunionService.deleteReunion(reunion);
+                        notifyDataSetChanged();
+                        dialog.dismiss();
+                        Toast.makeText(context, context.getString(R.string.toast_delete), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
                 //notifyItemChanged(holder.getAdapterPosition());
             }
         });
@@ -110,12 +138,19 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.image_reunion)
        public ImageView mImage;
+        @BindView(R.id.salleText)
        public TextView mLieu;
+        @BindView(R.id.sujetText)
        public TextView mSujet;
+        @BindView(R.id.emailText)
        public TextView mEmail;
+        @BindView(R.id.heureText)
        public TextView mHeure;
+        @BindView(R.id.dateText)
        public TextView mDate;
+        @BindView(R.id.deleteButton)
        public ImageButton mDeleteButton;
        public View layout;
 
@@ -123,15 +158,7 @@ public class ReunionRecyclerViewAdapter extends RecyclerView.Adapter<ReunionRecy
             super(view);
             layout = view;
 
-            mImage = view.findViewById(R.id.image_reunion);
-            mLieu = view.findViewById(R.id.salleText);
-            mSujet = view.findViewById(R.id.sujetText);
-            mEmail = view.findViewById(R.id.emailText);
-            mHeure = view.findViewById(R.id.heureText);
-            mDate = view.findViewById(R.id.dateText);
-            mDeleteButton = view.findViewById(R.id.deleteButton);
-
-
+            ButterKnife.bind(this, view);
         }
     }
 }

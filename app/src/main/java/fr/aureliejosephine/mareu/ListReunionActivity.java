@@ -2,43 +2,32 @@ package fr.aureliejosephine.mareu;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ImageView;
 import android.widget.SearchView;
-
-import java.util.Arrays;
-import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.aureliejosephine.mareu.DI.DI;
-import fr.aureliejosephine.mareu.modele.Reunion;
 import fr.aureliejosephine.mareu.services.ReunionService;
 
 
 public class ListReunionActivity extends AppCompatActivity {
 
-    ReunionRecyclerViewAdapter adapter;
 
-    private RecyclerView recyclerView;
-
+    @BindView(R.id.my_recycler_view)
+    public RecyclerView recyclerView;
+    @BindView(R.id.fab)
     public FloatingActionButton mButton;
+    @BindView(R.id.searchView)
+    public SearchView mSearchView;
 
+    ReunionRecyclerViewAdapter adapter;
     private ReunionService mReunionService;
-
-    private ImageView mAvatarReunion;
-
-    private Reunion reunion;
-
-    private SearchView mSearchView;
-
 
 
     @Override
@@ -48,11 +37,24 @@ public class ListReunionActivity extends AppCompatActivity {
 
         mReunionService = DI.getReunionService();
 
-        mSearchView = findViewById(R.id.searchView);
-        mButton = findViewById(R.id.fab);
-        mAvatarReunion = findViewById(R.id.image_reunion);
-        recyclerView = findViewById(R.id.my_recycler_view);
+        ButterKnife.bind(this);
 
+        configSearchView();
+
+        configRecyclerView();
+    }
+
+
+    public void configRecyclerView(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new ReunionRecyclerViewAdapter(this, mReunionService.getReunion());
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL));
+    }
+
+    public void configSearchView(){
         mSearchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -66,23 +68,12 @@ public class ListReunionActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ReunionRecyclerViewAdapter(this, mReunionService.getReunion());
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
-                DividerItemDecoration.VERTICAL));
-
     }
-
 
     public void goToAddReunion(View view) {
         Intent intent = new Intent (this, AddReunionActivity.class);
         startActivity(intent);
     }
-
-
 
 
 }

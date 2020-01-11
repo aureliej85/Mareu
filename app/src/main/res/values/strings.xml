@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Maréu : gestionnaire de réunions</string>
+    <string name="confirm_delete">Voulez-vous vraiment supprimer cette réunion ?</string>
+    <string name="toast_delete">Réunion supprimée !</string>
+    <string name="toast_add">Réunion enregistrée !</string>
+    <string name="entrez_email">Entrez une adresse email</string>
 
     <string-array name="liste_salles">
         <item>Indigo</item>

@@ -1,36 +1,38 @@
 package fr.aureliejosephine.mareu.modele;
 
-import android.graphics.drawable.Drawable;
-
 import java.util.ArrayList;
-
-import fr.aureliejosephine.mareu.R;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Reunion {
 
     private String lieu;
     private String sujet;
-    private String email;
     private String date;
     private String heure;
     private int avatar;
+    private ArrayList<String> addEmail;
 
 
-    public Reunion(String lieu, String sujet, String email, String date, String heure) {
+    public Reunion(){
+
+    }
+
+    public Reunion(String lieu, String sujet, String date, String heure) {
         this.lieu = lieu;
         this.sujet = sujet;
-        this.email = email;
         this.date = date;
         this.heure = heure;
     }
 
-    public Reunion(String lieu, String sujet, String email, String date, String heure, int avatar) {
+    public Reunion(String lieu, String sujet, String date, String heure, int avatar) {
         this.lieu = lieu;
         this.sujet = sujet;
-        this.email = email;
         this.date = date;
         this.heure = heure;
         this.avatar = avatar;
+        addEmail = new ArrayList<>();
     }
 
 
@@ -48,14 +50,6 @@ public class Reunion {
 
     public void setSujet(String sujet) {
         this.sujet = sujet;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getDate() {
@@ -80,5 +74,17 @@ public class Reunion {
 
     public void setAvatar(int avatar) {
         this.avatar = avatar;
+    }
+
+    public ArrayList<String> getAddEmail() {
+        return addEmail;
+    }
+
+    public void setAddEmail(ArrayList<String> emailList) {
+        this.addEmail = emailList;
+    }
+
+    public void addEmails(String string) {
+        this.addEmail.add(string);
     }
 }
