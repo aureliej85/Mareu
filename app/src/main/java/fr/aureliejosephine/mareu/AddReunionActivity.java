@@ -1,9 +1,10 @@
 package fr.aureliejosephine.mareu;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,56 +13,37 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TimePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.textfield.TextInputEditText;
-
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Locale;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fr.aureliejosephine.mareu.DI.DI;
 import fr.aureliejosephine.mareu.modele.Reunion;
 import fr.aureliejosephine.mareu.services.ReunionService;
 
-
 public class AddReunionActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-
-    @BindView(R.id.sujetEdit)
-    public EditText nSujet;
-    @BindView(R.id.emailEdit1)
-    public EditText nEmails;
-    @BindView(R.id.emailEdit2)
-    public EditText nEmails2;
-    @BindView(R.id.emailEdit3)
-    public EditText nEmails3;
-    @BindView(R.id.emailEdit4)
-    public EditText nEmails4;
-    @BindView(R.id.spinner)
-    public Spinner nSalle;
-    @BindView(R.id.dateButton)
-    public Button nCal;
-    @BindView(R.id.heureButton)
-    public Button nHeure;
-    @BindView(R.id.addParticipant1)
-    public ImageView mAdd1;
-    @BindView(R.id.addParticipant2)
-    public ImageView mAdd2;
-    @BindView(R.id.addParticipant3)
-    public ImageView mAdd3;
-    @BindView(R.id.addParticipant4)
-    public ImageView mAdd4;
-
+    @BindView(R.id.subjectEdit) public EditText subject;
+    @BindView(R.id.emailEdit1) public EditText emailsParticipants;
+    @BindView(R.id.spinner) public Spinner room;
+    @BindView(R.id.spinnerHeure) public Spinner hourSpinner;
+    @BindView(R.id.addParticipant1) public ImageView addParticipantButton;
+    @BindView(R.id.emailTv) public TextView emailsTextView;
+    @BindView(R.id.dateTextView) public TextView dateTextView;
 
     private ReunionService mReunionService;
-    private List<String> mEmailList;
 
 
     @Override
@@ -73,27 +55,22 @@ public class AddReunionActivity extends AppCompatActivity implements AdapterView
 
         ButterKnife.bind(this);
 
-        configSpinner();
+        configSpinnerRoom();
 
+        configSpinnerHour();
+
+        configDateTextView();
     }
 
-    public void Enregistrer(View view) {
-        AddReunion();
-    }
-
-    public void AddReunion(){
-        String sujet = nSujet.getText().toString();
-        String emails = nEmails.getText().toString();
-        String emails2 = nEmails2.getText().toString();
-        String emails3 = nEmails3.getText().toString();
-        String emails4 = nEmails4.getText().toString();
-        String salle = nSalle.getSelectedItem().toString();
-        String date = nCal.getText().toString();
-        String heure = nHeure.getText().toString();
-
-
+    @OnClick(R.id.saveButton)
+    public void saveTheMeeting() {
+        String subjectMeeting = subject.getText().toString();
+        String roomMeeting = room.getSelectedItem().toString();
+        String dateMeeting = dateTextView.getText().toString();
+        String hourMeeting = hourSpinner.getSelectedItem().toString();
         int avatar = R.drawable.indigo_lens_24dp;
-        switch(salle){
+
+        switch(roomMeeting){
             case "Indigo":
                 avatar = R.drawable.indigo_lens_24dp;
                 break;
@@ -126,24 +103,23 @@ public class AddReunionActivity extends AppCompatActivity implements AdapterView
                 break;
         }
 
-        Reunion reunion = new Reunion(salle, sujet, date, heure, avatar);
-        reunion.addEmails(emails);
-        reunion.addEmails(emails2);
-        reunion.addEmails(emails3);
-        reunion.addEmails(emails4);
-        String mails = emails + " " + emails2 + " " + emails3 + " " + emails4;
-        reunion.addEmails(mails);
+        Reunion reunion = new Reunion(roomMeeting, subjectMeeting, dateMeeting, hourMeeting, avatar);
+        ArrayList<String> listEmails = new ArrayList<>(Arrays.asList(emailsTextView.getText().toString().split(" ")));
+        reunion.setAddEmail(listEmails);
+
         mReunionService.addReunion(reunion);
 
-        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.toast_add), Toast.LENGTH_SHORT);
-        toast.show();
-
-        System.out.println("salle: " + salle + " Sujet: " + sujet + " Email: " + mails + " Date: " + date + " Heure: " + heure );
+        Intent intent = new Intent(AddReunionActivity.this, ListReunionActivity.class);
+        startActivity(intent);
 
     }
 
-    public void goCalendar(View view) {
+    @OnClick(R.id.dateTextView)
+    public void goCalendar() {
+        //Locale locale = getResources().getConfiguration().locale;
+        Locale.setDefault(Locale.FRANCE);
         Calendar calendar = Calendar.getInstance();
+
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
@@ -152,35 +128,58 @@ public class AddReunionActivity extends AppCompatActivity implements AdapterView
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        nCal.setText(day + "/" + (month + 1) +"/" + year);
+                        dateTextView.setText(day + "/" + (month + 1) +"/" + year);
                     }
                 }, year, month, dayOfMonth);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
 
-    public void goClock(View view) {
-        Calendar calendar = Calendar.getInstance();
-        final int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        final int minute = calendar.get(Calendar.MINUTE);
+    public void configDateTextView(){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String date = df.format(Calendar.getInstance().getTime());
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(AddReunionActivity.this, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
-                nHeure.setText(hours + "h" + minutes);
-            }
-        },hour,minute,true);
-        timePickerDialog.show();
-
-
+        dateTextView.setText(date);
     }
 
-    public void configSpinner(){
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.liste_salles, android.R.layout.simple_spinner_item);
+    public void configSpinnerRoom(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.liste_salles, R.layout.spinner_item_reunion);
+        adapter.setDropDownViewResource(R.layout.spinner_item_reunion);
+        room.setAdapter(adapter);
+        room.setOnItemSelectedListener(this);
+    }
+
+    public void configSpinnerHour(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.horaires, R.layout.spinner_item_reunion);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        nSalle.setAdapter(adapter);
-        nSalle.setOnItemSelectedListener(this);
+        hourSpinner.setAdapter(adapter);
+        hourSpinner.setOnItemSelectedListener(this);
     }
 
+    @OnClick(R.id.addParticipant1)
+    public void addEmail() {
+        if (isEmailValid(emailsParticipants.getText().toString())) {
+            emailsTextView.append(emailsParticipants.getText().toString() + "\n");
+            emailsParticipants.getText().clear();
+            emailsParticipants.setBackground(null);
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.emailErreur), Toast.LENGTH_SHORT);
+            toast.show();
+            borderEditText();
+        }
+    }
+
+    public void borderEditText(){
+        GradientDrawable gd = new GradientDrawable();
+        //gd.setColor(Color.parseColor(getString(R.color.colorAccent2)));
+        gd.setColor(ContextCompat.getColor(AddReunionActivity.this, R.color.colorAccent2));
+        gd.setStroke(2,Color.RED);
+        emailsParticipants.setBackground(gd);
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
     @Override
     public void onItemSelected (AdapterView < ? > adapterView, View view,int i, long l){
@@ -191,52 +190,5 @@ public class AddReunionActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected (AdapterView < ? > adapterView){
 
     }
-
-
-    public void addEmail(View view) {
-        if (isEmailValid(nEmails.getText().toString())) {
-            mAdd1.setImageResource(R.drawable.ic_done_black_24dp);
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Adresse email incorrect", Toast.LENGTH_SHORT);
-            toast.show();
-            mAdd1.setImageResource(R.drawable.ic_error_outline_black_24dp);
-        }
-    }
-
-    public void addEmail2(View view) {
-        if (isEmailValid(nEmails2.getText().toString())) {
-            mAdd2.setImageResource(R.drawable.ic_done_black_24dp);
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Adresse email incorrect", Toast.LENGTH_SHORT);
-            toast.show();
-            mAdd2.setImageResource(R.drawable.ic_error_outline_black_24dp);
-        }
-    }
-
-    public void addEmail3(View view) {
-        if (isEmailValid(nEmails3.getText().toString())) {
-            mAdd3.setImageResource(R.drawable.ic_done_black_24dp);
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Adresse email incorrect", Toast.LENGTH_SHORT);
-            toast.show();
-            mAdd3.setImageResource(R.drawable.ic_error_outline_black_24dp);
-        }
-    }
-
-    public void addEmail4(View view) {
-        if (isEmailValid(nEmails4.getText().toString())) {
-            mAdd4.setImageResource(R.drawable.ic_done_black_24dp);
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(), "Adresse email incorrect", Toast.LENGTH_SHORT);
-            toast.show();
-            mAdd4.setImageResource(R.drawable.ic_error_outline_black_24dp);
-        }
-    }
-
-    boolean isEmailValid(CharSequence email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-
 
 }

@@ -49,7 +49,7 @@
                 android:background="#292931"
                 android:backgroundTint="#6A494A4B"
                 android:fontFamily="@font/roboto"
-                android:onClick="Enregistrer"
+                android:onClick="saveMeeting"
                 android:text="Enregistrer"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/qEmailText" />
 
             <EditText
-                android:id="@+id/sujetEdit"
+                android:id="@+id/subjectEdit"
                 android:layout_width="273dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -132,7 +132,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sujetEdit" />
+                app:layout_constraintTop_toBottomOf="@+id/subjectEdit" />
 
             <TextView
                 android:id="@+id/qSalleTexte"

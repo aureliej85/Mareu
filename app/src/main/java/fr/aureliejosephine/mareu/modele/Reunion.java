@@ -15,18 +15,20 @@ public class Reunion {
     private ArrayList<String> addEmail;
 
 
+
     public Reunion(){
+        addEmail = new ArrayList<>();
+
 
     }
 
-    public Reunion(String lieu, String sujet, String date, String heure) {
+    public Reunion(String lieu, String date, String heure) {
         this.lieu = lieu;
-        this.sujet = sujet;
         this.date = date;
         this.heure = heure;
     }
 
-    public Reunion(String lieu, String sujet, String date, String heure, int avatar) {
+    public Reunion(String lieu, String sujet, String date, String heure, int avatar){
         this.lieu = lieu;
         this.sujet = sujet;
         this.date = date;
