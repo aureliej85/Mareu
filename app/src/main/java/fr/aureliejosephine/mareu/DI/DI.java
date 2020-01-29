@@ -1,18 +1,18 @@
 package fr.aureliejosephine.mareu.DI;
 
-import fr.aureliejosephine.mareu.services.ReunionService;
-import fr.aureliejosephine.mareu.services.ReunionServiceClass;
+import fr.aureliejosephine.mareu.services.MeetingService;
+import fr.aureliejosephine.mareu.services.MeetingServiceClass;
 
 public class DI {
 
-        private static ReunionService service = new ReunionServiceClass();
+        private static MeetingService service = new MeetingServiceClass();
 
-        public static ReunionService getReunionService() {
+        public static MeetingService getReunionService() {
             return service;
         }
 
-        public static ReunionService getNewInstanceService() {
-            return new ReunionServiceClass();
+        public static MeetingService getNewInstanceService() {
+            return new MeetingServiceClass();
         }
 
 }
