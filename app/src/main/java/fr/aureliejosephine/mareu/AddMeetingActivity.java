@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -125,12 +126,14 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         ArrayList<String> listEmails = new ArrayList<String>(list);
         meeting.setAddEmail(listEmails);
 
-        mMeetingService.addMeeting(meeting);
-
-        Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
-        startActivity(intent);
+        if(TextUtils.isEmpty(subjectEditText.getText())){
+            subjectEditText.setError( "Veuillez saisir un sujet" );
+        } else {
+            mMeetingService.addMeeting(meeting);
+            Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
+            startActivity(intent);
+        }
     }
-
 
     @OnClick(R.id.dateTextView)
     public void goCalendar() {

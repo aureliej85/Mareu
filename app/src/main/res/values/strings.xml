@@ -3,7 +3,6 @@
     <string name="confirm_delete">Voulez-vous vraiment supprimer cette réunion ?</string>
     <string name="toast_delete">Réunion supprimée !</string>
     <string name="toast_add">Réunion enregistrée !</string>
-    <string name="entrez_email">Entrez une adresse email</string>
     <string name="emailErreur">Adresse email incorrecte</string>
     <string name="title">%1$s - %2$s - %3$s</string>
     <string name="appTitle">Ma réu</string>

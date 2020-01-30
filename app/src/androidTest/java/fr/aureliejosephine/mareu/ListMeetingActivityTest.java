@@ -1,14 +1,18 @@
 package fr.aureliejosephine.mareu;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 import fr.aureliejosephine.mareu.utils.DeleteViewAction;
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
@@ -20,9 +24,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
 
+
 public class ListMeetingActivityTest {
-    // This is fixed
-    private static int ITEMS_COUNT = 2;
 
     private ListMeetingActivity mActivity;
 
@@ -40,7 +43,7 @@ public class ListMeetingActivityTest {
      * We ensure that our recyclerview is displaying at least on item
      */
     @Test
-    public void reunionList_shouldNotBeEmpty() {
+    public void meetingListShouldNotBeEmpty() {
         onView(allOf(withId(R.id.my_recycler_view), isDisplayed()))
                 .check(matches(hasMinimumChildCount(1)));
     }
@@ -48,12 +51,16 @@ public class ListMeetingActivityTest {
     /**
      * When we delete an item, the item is no more shown
      */
+
     @Test
-    public void myNeighboursList_deleteAction_shouldRemoveItem() {
-        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(ITEMS_COUNT)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
+    public void meetingList_deleteAction_shouldRemoveItem() {
+        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(3)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
         onView(withText("OUI")).perform(click());
-        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(ITEMS_COUNT - 1));
+        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(3 - 1));
     }
+
+
+
 
 
 }
