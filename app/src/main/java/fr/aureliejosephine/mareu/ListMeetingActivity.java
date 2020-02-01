@@ -2,6 +2,8 @@ package fr.aureliejosephine.mareu;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.widget.SearchView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.aureliejosephine.mareu.DI.DI;
+import fr.aureliejosephine.mareu.services.MeetingGenerator;
 import fr.aureliejosephine.mareu.services.MeetingService;
 
 

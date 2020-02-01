@@ -29,8 +29,8 @@ public class MeetingListTest {
     @Test
     public void getMeetingWithSuccess() {
         List<Meeting> meetings = service.getMeeting();
-        List<Meeting> expectedNeighbours = MeetingGenerator.listMeeting;
-        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedNeighbours.toArray()));
+        List<Meeting> expectedMeetings = MeetingGenerator.listMeeting;
+        assertThat(meetings, IsIterableContainingInAnyOrder.containsInAnyOrder(expectedMeetings.toArray()));
     }
 
     @Test
