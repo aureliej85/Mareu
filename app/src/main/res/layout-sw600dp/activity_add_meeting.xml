@@ -154,7 +154,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="25dp"
-                android:onClick="addEmail"
+                android:onClick="addEmailToListView"
                 app:layout_constraintStart_toEndOf="@+id/emailEdit1"
                 app:layout_constraintTop_toBottomOf="@+id/view2"
                 app:srcCompat="@drawable/ic_done_black_24dp" />

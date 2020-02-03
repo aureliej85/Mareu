@@ -39,28 +39,18 @@ public class ListMeetingActivityTest {
         assertThat(mActivity, notNullValue());
     }
 
-    /**
-     * We ensure that our recyclerview is displaying at least on item
-     */
+
     @Test
     public void meetingListShouldNotBeEmpty() {
         onView(allOf(withId(R.id.my_recycler_view), isDisplayed()))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
-    /**
-     * When we delete an item, the item is no more shown
-     */
-
     @Test
     public void meetingList_deleteAction_shouldRemoveItem() {
-        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(3)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
+        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(4)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
         onView(withText("OUI")).perform(click());
-        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(3 - 1));
+        onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(4 - 1));
     }
-
-
-
-
 
 }

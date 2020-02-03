@@ -1,11 +1,7 @@
 package fr.aureliejosephine.mareu;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,15 +14,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,11 +44,9 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     ArrayAdapter<String> adapter;
     Context context = AddMeetingActivity.this;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_add_meeting);
         mMeetingService = DI.getReunionService();
         ButterKnife.bind(this);
@@ -73,12 +64,11 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         emailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                list.remove(i);
+                list.remove(i);  //click to delete email from the list
                 adapter.notifyDataSetChanged();
                 Toast.makeText(AddMeetingActivity.this, context.getString(R.string.email_supprimé), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     @OnClick(R.id.saveButton)
@@ -89,55 +79,39 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         String hourMeeting = hourSpinner.getSelectedItem().toString();
         int avatar = R.drawable.indigo_lens_24dp;
 
+        //An avatar have to match a room
         switch(roomMeeting){
-            case "Indigo":
-                avatar = R.drawable.indigo_lens_24dp;
-                break;
-            case "Fuscia":
-                avatar = R.drawable.fuschia_lens_24dp;
-                break;
-            case "Sépia":
-                avatar = R.drawable.sepia_lens_24dp;
-                break;
-            case "Corail":
-                avatar = R.drawable.corail_lens_4dp;
-                break;
-            case "Rubis":
-                avatar = R.drawable.rubis_lens_24dp;
-                break;
-            case "Jade":
-                avatar = R.drawable.jade_lens_24dp;
-                break;
-            case "Mauve":
-                avatar = R.drawable.mauve_lens_24dp;
-                break;
-            case "Topaze":
-                avatar = R.drawable.topaze_lens_24dp;
-                break;
-            case "Grège":
-                avatar = R.drawable.grege_lens_24dp;
-                break;
-            case "Noire":
-                avatar = R.drawable.ic_lens_black_24dp;
-                break;
-        }
+            case "Réunion A": avatar = R.drawable.indigo_lens_24dp; break;
+            case "Réunion B": avatar = R.drawable.fuschia_lens_24dp; break;
+            case "Réunion C": avatar = R.drawable.sepia_lens_24dp; break;
+            case "Réunion D": avatar = R.drawable.corail_lens_4dp; break;
+            case "Réunion E": avatar = R.drawable.rubis_lens_24dp; break;
+            case "Réunion F": avatar = R.drawable.jade_lens_24dp; break;
+            case "Réunion G": avatar = R.drawable.mauve_lens_24dp; break;
+            case "Réunion H": avatar = R.drawable.topaze_lens_24dp; break;
+            case "Réunion I": avatar = R.drawable.grege_lens_24dp; break;
+            case "Réunion J": avatar = R.drawable.ic_lens_black_24dp;break; }
 
-        Meeting meeting = new Meeting(roomMeeting, subjectMeeting, dateMeeting, hourMeeting, avatar);
+        Meeting meeting = new Meeting(roomMeeting, subjectMeeting, dateMeeting, hourMeeting, avatar); //New meeting created
         ArrayList<String> listEmails = new ArrayList<String>(list);
-        meeting.setAddEmail(listEmails);
+        meeting.setEmailList(listEmails); //Add email list to to the new meeting created
 
-        if(TextUtils.isEmpty(subjectEditText.getText())){
-            subjectEditText.setError( "Veuillez saisir un sujet" );
-        } else {
-            mMeetingService.addMeeting(meeting);
-            Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
-            startActivity(intent);
+
+       if (TextUtils.isEmpty(subjectEditText.getText())){
+                subjectEditText.setError( getString(R.string.message_subject_field_require) ); //Subject field require
+            } else {
+                mMeetingService.addMeeting(meeting); //Add new meeting to the list
+                Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
+                startActivity(intent);
+            }
         }
-    }
 
+
+    /**
+     * Click to get a calendar to pick a date
+     */
     @OnClick(R.id.dateTextView)
     public void goCalendar() {
-        //Locale locale = getResources().getConfiguration().locale;
         Locale.setDefault(Locale.FRANCE);
         Calendar calendar = Calendar.getInstance();
 
@@ -156,12 +130,17 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         datePickerDialog.show();
     }
 
+
+    /**
+     * Configure date format
+     */
     public void configDateTextView(){
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String date = df.format(Calendar.getInstance().getTime());
 
         dateTextView.setText(date);
     }
+
 
     public void configSpinnerRoom(){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.liste_salles, R.layout.spinner_item_meeting);
@@ -170,6 +149,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         roomSpinner.setOnItemSelectedListener(this);
     }
 
+
     public void configSpinnerHour(){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.horaires, R.layout.spinner_item_meeting);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -177,9 +157,10 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         hourSpinner.setOnItemSelectedListener(this);
     }
 
+
     @OnClick(R.id.addParticipant1)
-    public void addEmail() {
-        if (isEmailValid(emailsParticipants.getText().toString())) {
+    public void addEmailToListView() {
+        if (isEmailValid(emailsParticipants.getText().toString())) { //Check if the input is an email
             list.add(emailsParticipants.getText().toString());
             adapter.notifyDataSetChanged();
             emailsParticipants.getText().clear();
@@ -187,27 +168,27 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.emailErreur), Toast.LENGTH_SHORT);
             toast.show();
-            borderEditText();
         }
     }
 
+
+    /**
+     * Back to the first activity without save anything
+     */
     @OnClick(R.id.closeIv)
     public void closeWindow(){
         Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
         startActivity(intent);
     }
 
-    public void borderEditText(){
-        GradientDrawable gd = new GradientDrawable();
-        //gd.setColor(Color.parseColor(getString(R.color.colorAccent2)));
-        gd.setColor(ContextCompat.getColor(AddMeetingActivity.this, R.color.colorAccent2));
-        gd.setStroke(2,Color.RED);
-        emailsParticipants.setBackground(gd);
-    }
 
+    /**
+     * Check if the input is an email
+     */
     boolean isEmailValid(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
 
     @Override
     public void onItemSelected (AdapterView < ? > adapterView, View view,int i, long l){

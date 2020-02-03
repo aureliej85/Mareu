@@ -2,8 +2,7 @@ package fr.aureliejosephine.mareu;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
+import fr.aureliejosephine.mareu.services.MeetingGenerator;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +14,7 @@ import android.widget.SearchView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.aureliejosephine.mareu.DI.DI;
-import fr.aureliejosephine.mareu.services.MeetingGenerator;
+import fr.aureliejosephine.mareu.modele.Meeting;
 import fr.aureliejosephine.mareu.services.MeetingService;
 
 
@@ -36,10 +35,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_meeting);
         meetingService = DI.getReunionService();
         ButterKnife.bind(this);
-
-        configSearchView();
         configRecyclerView();
-        fakeEmail();
+        configSearchView();
     }
 
     public void configRecyclerView(){
@@ -67,16 +64,19 @@ public class ListMeetingActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Click on FAB to go to {@link AddMeetingActivity}
+     */
     public void goToAddMeeting(View view) {
         Intent intent = new Intent (this, AddMeetingActivity.class);
         startActivity(intent);
     }
 
-    public void fakeEmail(){
-        meetingService.getMeeting().get(0).addEmails("aurelie@gmail.com, delphine@gmail.com");
-        meetingService.getMeeting().get(1).addEmails("vanessa@gmail.com, hekpazo@gmail.com");
-        meetingService.getMeeting().get(2).addEmails("sylvere@gmail.com, laurent@gmail.com");
+   /* @Override
+    protected void onDestroy(){
+       super.onDestroy();
+       meetingService.getMeeting().clear();
     }
-
+*/
 
 }

@@ -12,5 +12,4 @@ public interface MeetingService {
 
     void deleteMeeting(Meeting meeting);
 
-
 }

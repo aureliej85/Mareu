@@ -54,7 +54,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
         String text= context.getString(R.string.title, meeting.getRoom(), meeting.getHour(), meeting.getSubject());
         holder.roomHourSubjTv.setText(text);
-        holder.mEmail.setText(meeting.getAddEmail().toString().replace("[", " ").replace("]", " "));
+        holder.mEmail.setText(meeting.getEmailList().toString().replace("[", " ").replace("]", " "));
 
         Glide.with(holder.mImage.getContext())
                 .load(meeting.getAvatar())
@@ -64,7 +64,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage(context.getString(R.string.confirm_delete));
                 builder.setCancelable(false);
@@ -85,8 +84,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
-                //notifyItemChanged(holder.getAdapterPosition());
             }
         });
 
@@ -97,11 +94,9 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         return list.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return filterDatePlace;
-    }
-
+    /**
+     * A filter to sort meetings by room or by date
+     */
     private Filter filterDatePlace = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -132,6 +127,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
             notifyDataSetChanged();
         }
     };
+
+    @Override
+    public Filter getFilter() {
+        return filterDatePlace;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

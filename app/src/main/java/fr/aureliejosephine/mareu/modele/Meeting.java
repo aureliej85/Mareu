@@ -2,11 +2,10 @@ package fr.aureliejosephine.mareu.modele;
 
 
 
-import org.parceler.Parcel;
-
 import java.util.ArrayList;
+import java.util.List;
 
-@Parcel
+
 public class Meeting {
 
     private String room;
@@ -14,15 +13,14 @@ public class Meeting {
     private String date;
     private String hour;
     private int avatar;
-    private ArrayList<String> addEmail;
-    private String fakeEmail;
-
-
+    private List<String> emailList;
 
     public Meeting(){
-        addEmail = new ArrayList<>();
+        emailList = new ArrayList<>();
     }
 
+
+    //CONSTRUCTORS
     public Meeting(String room, String date, String hour) {
         this.room = room;
         this.date = date;
@@ -35,9 +33,11 @@ public class Meeting {
         this.date = date;
         this.hour = hour;
         this.avatar = avatar;
-        addEmail = new ArrayList<>();
+        emailList = new ArrayList<>();
     }
 
+
+    //GETTERS & SETTERS
     public String getRoom() {
         return room;
     }
@@ -78,16 +78,17 @@ public class Meeting {
         this.avatar = avatar;
     }
 
-    public ArrayList<String> getAddEmail() {
-        return addEmail;
+    public List<String> getEmailList() {
+        return emailList;
     }
 
-    public void setAddEmail(ArrayList<String> emailList) {
-        this.addEmail = emailList;
+    public void setEmailList(ArrayList<String> emailList) {
+        this.emailList = emailList;
     }
 
+    //Add a String as an email to the emailList
     public void addEmails(String string) {
-        this.addEmail.add(string);
+        this.emailList.add(string);
     }
 
 
