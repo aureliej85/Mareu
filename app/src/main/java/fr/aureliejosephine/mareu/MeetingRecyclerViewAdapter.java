@@ -42,14 +42,14 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_meeting, parent, false);
+                .inflate(R.layout.item_meeting, parent, false);
         context = parent.getContext();
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        mMeetingService = DI.getReunionService();
+        mMeetingService = DI.getMeetingService();
         final Meeting meeting = list.get(position);
 
         String text= context.getString(R.string.title, meeting.getRoom(), meeting.getHour(), meeting.getSubject());

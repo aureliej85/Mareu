@@ -48,27 +48,15 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
-        mMeetingService = DI.getReunionService();
+        mMeetingService = DI.getMeetingService();
         ButterKnife.bind(this);
 
         configSpinnerRoom();
         configSpinnerHour();
         configDateTextView();
+        configListView();
 
-        //ADAPTER
-        list = new ArrayList<String>();
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-        emailListView.setAdapter(adapter);
 
-        //LISTENER
-        emailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                list.remove(i);  //click to delete email from the list
-                adapter.notifyDataSetChanged();
-                Toast.makeText(AddMeetingActivity.this, context.getString(R.string.email_supprimé), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
     @OnClick(R.id.saveButton)
@@ -92,7 +80,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             case "Réunion I": avatar = R.drawable.grege_lens_24dp; break;
             case "Réunion J": avatar = R.drawable.ic_lens_black_24dp;break; }
 
-        Meeting meeting = new Meeting(roomMeeting, subjectMeeting, dateMeeting, hourMeeting, avatar); //New meeting created
+        Meeting meeting = new Meeting(roomMeeting, subjectMeeting, dateMeeting, hourMeeting, avatar, null); //New meeting created
         ArrayList<String> listEmails = new ArrayList<String>(list);
         meeting.setEmailList(listEmails); //Add email list to to the new meeting created
 
@@ -155,6 +143,24 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hourSpinner.setAdapter(adapter);
         hourSpinner.setOnItemSelectedListener(this);
+    }
+
+
+    public void configListView(){
+        //ADAPTER
+        list = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+        emailListView.setAdapter(adapter);
+
+        //LISTENER
+        emailListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                list.remove(i);  //click to delete email from the list
+                adapter.notifyDataSetChanged();
+                Toast.makeText(AddMeetingActivity.this, context.getString(R.string.email_supprimé), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

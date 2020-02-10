@@ -7,7 +7,7 @@ public class DI {
 
         private static MeetingService service = new MeetingServiceClass();
 
-        public static MeetingService getReunionService() {
+        public static MeetingService getMeetingService() {
             return service;
         }
 

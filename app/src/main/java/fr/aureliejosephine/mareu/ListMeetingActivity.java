@@ -2,7 +2,7 @@ package fr.aureliejosephine.mareu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import fr.aureliejosephine.mareu.services.MeetingGenerator;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +14,6 @@ import android.widget.SearchView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import fr.aureliejosephine.mareu.DI.DI;
-import fr.aureliejosephine.mareu.modele.Meeting;
 import fr.aureliejosephine.mareu.services.MeetingService;
 
 
@@ -33,10 +32,11 @@ public class ListMeetingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_meeting);
-        meetingService = DI.getReunionService();
+        meetingService = DI.getMeetingService();
         ButterKnife.bind(this);
         configRecyclerView();
         configSearchView();
+
     }
 
     public void configRecyclerView(){
@@ -64,6 +64,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         });
     }
 
+
     /**
      * Click on FAB to go to {@link AddMeetingActivity}
      */
@@ -72,11 +73,5 @@ public class ListMeetingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   /* @Override
-    protected void onDestroy(){
-       super.onDestroy();
-       meetingService.getMeeting().clear();
-    }
-*/
 
 }

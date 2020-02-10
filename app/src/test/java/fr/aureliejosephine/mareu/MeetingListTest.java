@@ -1,18 +1,14 @@
 package fr.aureliejosephine.mareu;
 
-import org.hamcrest.collection.IsArrayContaining;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 import fr.aureliejosephine.mareu.DI.DI;
 import fr.aureliejosephine.mareu.modele.Meeting;
 import fr.aureliejosephine.mareu.services.MeetingGenerator;
 import fr.aureliejosephine.mareu.services.MeetingService;
-
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;

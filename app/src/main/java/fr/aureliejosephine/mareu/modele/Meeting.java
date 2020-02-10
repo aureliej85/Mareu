@@ -1,8 +1,5 @@
 package fr.aureliejosephine.mareu.modele;
 
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,25 +12,22 @@ public class Meeting {
     private int avatar;
     private List<String> emailList;
 
-    public Meeting(){
-        emailList = new ArrayList<>();
-    }
-
 
     //CONSTRUCTORS
     public Meeting(String room, String date, String hour) {
         this.room = room;
         this.date = date;
         this.hour = hour;
+
     }
 
-    public Meeting(String room, String subject, String date, String hour, int avatar){
+    public Meeting(String room, String subject, String date, String hour, int avatar, List<String> emailList){
         this.room = room;
         this.subject = subject;
         this.date = date;
         this.hour = hour;
         this.avatar = avatar;
-        emailList = new ArrayList<>();
+        this.emailList = emailList;
     }
 
 
@@ -82,14 +76,11 @@ public class Meeting {
         return emailList;
     }
 
-    public void setEmailList(ArrayList<String> emailList) {
+    public void setEmailList(List<String> emailList) {
         this.emailList = emailList;
     }
 
-    //Add a String as an email to the emailList
-    public void addEmails(String string) {
-        this.emailList.add(string);
-    }
+
 
 
 }

@@ -30,8 +30,7 @@ public class ListMeetingActivityTest {
     private ListMeetingActivity mActivity;
 
     @Rule
-    public ActivityTestRule<ListMeetingActivity> mActivityRule =
-            new ActivityTestRule(ListMeetingActivity.class);
+    public ActivityTestRule<ListMeetingActivity> mActivityRule = new ActivityTestRule(ListMeetingActivity.class);
 
     @Before
     public void setUp() {
