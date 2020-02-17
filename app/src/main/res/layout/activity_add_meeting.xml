@@ -6,16 +6,13 @@
     android:id="@+id/containerAddMeeting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical">
+    android:background="@android:color/white">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/colorPrimary"
-        android:backgroundTint="@color/colorPrimary"
+        android:layout_height="60dp"
         app:cardBackgroundColor="@color/colorPrimary"
         app:cardElevation="7dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,31 +22,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/closeIv"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="5dp"
-                android:background="#00FFFFFF"
-                android:backgroundTint="#00FAF9F9"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_close_black_24dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_close_black_24dp" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="11dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
                 android:background="@color/colorPrimary"
-                android:backgroundTint="@color/colorPrimary"
+                android:elevation="0dp"
                 android:fontFamily="@font/roboto_bold"
-                android:onClick="saveMeeting"
-                android:shadowColor="#00EEE9E9"
-                android:text="Enregistrer"
-                android:textColor="#FFFFFF"
-                android:textColorHighlight="#00FFFFFF"
+                android:text="@string/save_button"
+                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +65,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -79,61 +74,53 @@
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="160dp"
+                android:layout_marginTop="30dp"
                 android:background="#C4AAA7A7"
-                android:foregroundTint="#CB070606"
-                app:layout_constraintTop_toTopOf="@+id/guideline3"
-                tools:layout_editor_absoluteX="-16dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
 
             <View
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="240dp"
+                android:layout_marginTop="30dp"
                 android:background="#C4AAA7A7"
                 android:foregroundTint="#CB070606"
-                app:layout_constraintTop_toTopOf="@+id/guideline3"
-                tools:layout_editor_absoluteX="0dp" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
             <EditText
                 android:id="@+id/subjectEdit"
-                android:layout_width="304dp"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="#00FFFFFF"
-                android:ems="10"
-                android:enabled="true"
+                android:layout_marginTop="80dp"
+                android:background="@android:color/transparent"
                 android:fontFamily="@font/roboto"
-                android:hint="Ajouter un sujet"
+                android:hint="@string/ajouter_un_sujet"
                 android:inputType="textPersonName"
-                android:scrollbarDefaultDelayBeforeFade="400"
-                android:scrollbarFadeDuration="250"
-                android:textAlignment="textStart"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/view3"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="30dp"
                 android:background="#C4AAA7A7"
-                android:foregroundTint="#CB070606"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline3" />
+                app:layout_constraintTop_toBottomOf="@+id/subjectEdit" />
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
-                android:layout_marginStart="96dp"
                 android:layout_marginTop="20dp"
                 android:animateLayoutChanges="false"
                 android:entries="@array/liste_salles"
                 android:spinnerMode="dialog"
                 android:theme="@style/Spinner"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <EditText
@@ -141,24 +128,25 @@
                 android:layout_width="244dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#00181212"
-                android:ems="10"
+                android:backgroundTint="@android:color/transparent"
                 android:fontFamily="@font/roboto"
-                android:hint="Entrez une adresse email"
+                android:hint="@string/entrez_une_adresse_email"
                 android:inputType="textEmailAddress"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/guideline4"
                 app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-            <ImageView
+
+            <ImageButton
                 android:id="@+id/addParticipant1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="25dp"
-                android:onClick="addEmailToListView"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_done_black_24dp"
                 app:layout_constraintStart_toEndOf="@+id/emailEdit1"
-                app:layout_constraintTop_toBottomOf="@+id/view2"
-                app:srcCompat="@drawable/ic_done_black_24dp" />
+                app:layout_constraintTop_toBottomOf="@+id/view2"></ImageButton>
+
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -190,7 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#00FFFFFF"
+                android:backgroundTint="@android:color/transparent"
                 android:entries="@array/horaires"
                 android:gravity="center|center_horizontal"
                 android:spinnerMode="dialog"
@@ -198,16 +186,6 @@
                 app:layout_constraintStart_toEndOf="@+id/dateTextView"
                 app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="200dp"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="40dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline4"

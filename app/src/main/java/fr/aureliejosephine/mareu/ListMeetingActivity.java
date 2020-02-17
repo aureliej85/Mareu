@@ -24,7 +24,7 @@ public class ListMeetingActivity extends AppCompatActivity {
     @BindView(R.id.fab) public FloatingActionButton fabAddMeeting;
     @BindView(R.id.searchView) public SearchView searchViewFilter;
 
-    MeetingRecyclerViewAdapter adapter;
+    private MeetingRecyclerViewAdapter adapter;
     private MeetingService meetingService;
 
 

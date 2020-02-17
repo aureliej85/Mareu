@@ -1,5 +1,6 @@
 package fr.aureliejosephine.mareu;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -40,9 +41,9 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     private MeetingService mMeetingService;
 
-    ArrayList<String> list;
-    ArrayAdapter<String> adapter;
-    Context context = AddMeetingActivity.this;
+    private ArrayList<String> list;
+    private ArrayAdapter<String> adapter;
+    private Context context = AddMeetingActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,8 +184,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
      */
     @OnClick(R.id.closeIv)
     public void closeWindow(){
-        Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
-        startActivity(intent);
+        this.finish();
     }
 
 

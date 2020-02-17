@@ -28,13 +28,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     private List<Meeting> list;
     private List<Meeting> listFull;
-    private LayoutInflater mInflater;
     private MeetingService mMeetingService;
     private Context context;
 
 
     public MeetingRecyclerViewAdapter(Context context, List<Meeting> meetings) {
-        this.mInflater = LayoutInflater.from(context);
         this.list = meetings;
         listFull = new ArrayList<>(meetings);
     }
@@ -67,7 +65,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage(context.getString(R.string.confirm_delete));
                 builder.setCancelable(false);
-                builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(context.getString(R.string.oui), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mMeetingService.deleteMeeting(meeting);
@@ -76,7 +74,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                         Toast.makeText(context, context.getString(R.string.toast_delete), Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(context.getString(R.string.non), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -139,9 +137,9 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         @BindView(R.id.image_reunion) public ImageView mImage;
         @BindView(R.id.emailText) public TextView mEmail;
         @BindView(R.id.deleteButton) public ImageButton mDeleteButton;
-        public View layout;
+        private View layout;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
             layout = view;
             ButterKnife.bind(this, view);

@@ -12,6 +12,11 @@
     <string name="test_text_meeting_added">Réunion A - 7h00 - New meeting added</string>
     <string name="test_input_date">29/7/2020</string>
     <string name="test_subject_input2">Réunion J - 11h00 - Sujet 2</string>
+    <string name="save_button">Enregistrer</string>
+    <string name="ajouter_un_sujet">Ajouter un sujet</string>
+    <string name="entrez_une_adresse_email">Entrez une adresse email</string>
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
 
     <string-array name="liste_salles">
         <item>Réunion A</item>
