@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter_list_black_24dp"
+        android:title="@string/menu_filter"
+        app:showAsAction="ifRoom">
+
+        <menu>
+
+
+            <item
+                android:id="@+id/filter_match_date"
+                android:title="Filtrer par date"
+                app:showAsAction="never" />
+
+
+            <item
+                android:id="@+id/filter_by_date"
+                android:title="Filtrer par salle"
+                app:showAsAction="never"/>
+
+            <item
+                android:id="@+id/filter_raz"
+                android:title="Supprimer le filtre"
+                app:showAsAction="never" />
+
+
+        </menu>
+
+    </item>
+
+
+</menu>
