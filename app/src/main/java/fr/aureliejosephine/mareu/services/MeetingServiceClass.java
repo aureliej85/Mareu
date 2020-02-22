@@ -1,17 +1,10 @@
 package fr.aureliejosephine.mareu.services;
 
-import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.List;
 
 import fr.aureliejosephine.mareu.modele.Meeting;
 
-import static fr.aureliejosephine.mareu.utils.MeetingUtil.getMeetingsAfterOrSameDate;
-import static fr.aureliejosephine.mareu.utils.MeetingUtil.getMeetingsBeforeOrSameDate;
-import static fr.aureliejosephine.mareu.utils.MeetingUtil.getMeetingsMatchDate;
 
 public class MeetingServiceClass implements MeetingService {
 
@@ -46,24 +39,7 @@ public class MeetingServiceClass implements MeetingService {
     }
 
 
-    @Override
-    public List<Meeting> getMeetingsFilteredByDate(Calendar date, DateFilter filterType) {
-        Log.d("TAG", "get meetings filtered by date");
-        switch (filterType) {
-            case BEFORE:
-                Log.d("TAG", "getMeetingsBeforeDate");
-                return getMeetingsBeforeOrSameDate(date, meetings);
-            case MATCH:
-                Log.d("TAG", "getMeetingsMatchDate");
-                return getMeetingsMatchDate(date, meetings);
-            case AFTER:
-                Log.d("TAG", "getMeetingsAfterDate");
-                return getMeetingsAfterOrSameDate(date, meetings);
-            default:
-                Log.d("TAG", "getMeetings");
-                return getMeeting();
-        }
-    }
+
 
 
 

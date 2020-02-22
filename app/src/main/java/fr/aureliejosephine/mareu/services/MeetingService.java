@@ -7,12 +7,6 @@ import fr.aureliejosephine.mareu.modele.Meeting;
 
 public interface MeetingService {
 
-    enum DateFilter {
-        NONE,
-        BEFORE,
-        MATCH,
-        AFTER
-    }
 
     List<Meeting> getMeeting();
 
@@ -20,7 +14,7 @@ public interface MeetingService {
 
     void deleteMeeting(Meeting meeting);
 
-    List<Meeting> getMeetingsFilteredByDate(Calendar date, DateFilter filterType);
+
 
 
 }
