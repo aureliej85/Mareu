@@ -16,8 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddMeetingActivity"
-            android:parentActivityName=".ListMeetingActivity"></activity>
+        <activity
+            android:name=".AddMeetingActivity"
+            android:parentActivityName=".ListMeetingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"

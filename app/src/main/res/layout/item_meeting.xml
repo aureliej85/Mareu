@@ -8,70 +8,66 @@
     android:elevation="7dp"
     android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:layout_width="49dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="4dp"
-        android:background="#00FFFFFF"
-        android:onClick="deleteReunion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_delete" />
-
     <ImageView
         android:id="@+id/image_reunion"
         android:layout_width="67dp"
         android:layout_height="67dp"
-        android:layout_marginTop="16dp"
         android:background="#00E91E63"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/emailText"
-        android:layout_width="243dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="52dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/roboto"
-        android:maxLines="2"
-        android:scrollHorizontally="true"
-        android:singleLine="true"
-        android:text="aurelie@email.fr,  josephine@email.fr"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="90dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.24" />
-
-    <TextView
         android:id="@+id/roomHourSubjTv"
-        android:layout_width="243dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:ellipsize="end"
         android:fontFamily="@font/roboto_bold"
-        android:text="Réunion A - 14h00 - Mario"
-        android:textColor="#000000"
+        android:text="Réunion A - 14h00 - Mari"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintBottom_toTopOf="@+id/emailText"
+        app:layout_constraintEnd_toStartOf="@id/barrier"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/image_reunion"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto"
+        android:singleLine="true"
+        android:text="aurelie@email.fr,  josephin"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/barrier"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/image_reunion"
+        app:layout_constraintTop_toBottomOf="@+id/roomHourSubjTv" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="deleteButton" />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:onClick="deleteReunion"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

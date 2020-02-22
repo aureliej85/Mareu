@@ -9,15 +9,10 @@
         <item name="chipIconTint">@color/chipIconTint</item>
     </style>
 
-
-
     <style name="Spinner" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
-        <item name="android:paddingStart">0dp</item>
-        <item name="android:paddingEnd">10dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">10dp</item>
+        <item name="android:padding">10dp</item>
         <item name="android:textColor">@color/colorTextHint</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">50sp</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
@@ -27,7 +22,7 @@
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:textColor">@color/colorTextHint</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 </resources>

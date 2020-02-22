@@ -15,9 +15,13 @@
     <string name="save_button">Enregistrer</string>
     <string name="ajouter_un_sujet">Ajouter un sujet</string>
     <string name="entrez_une_adresse_email">Entrez une adresse email</string>
+    <string name="enter_date">Entrez une date</string>
     <string name="oui">Oui</string>
     <string name="non">Non</string>
     <string name="menu_filter">menu_filter</string>
+    <string name="date_filter">Filtrer par date</string>
+    <string name="room_filter">Filtrer par salle</string>
+    <string name="date">%1$s / %2$s / %3$s à %4$sh%5$s</string>
 
     <string-array name="liste_salles">
         <item>Réunion A</item>

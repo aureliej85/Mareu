@@ -1,230 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/containerAddMeeting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:fillViewport="true">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:cardBackgroundColor="@color/colorPrimary"
-        app:cardElevation="7dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:padding="20dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-            <ImageButton
-                android:id="@+id/closeIv"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_close_black_24dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@color/colorPrimary"
-                android:elevation="0dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="@string/save_button"
-                android:textColor="@android:color/white"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <EditText
+            android:id="@+id/subjectEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/ajouter_un_sujet"
+            android:inputType="textCapWords"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:drawableStart="@drawable/ic_access_time_black_24dp"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/roboto"
+            android:padding="5dp"
+            android:text="@string/enter_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="30dp"
-                android:background="#C4AAA7A7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="20dp"
+            android:background="#C4AAA7A7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
 
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="30dp"
-                android:background="#C4AAA7A7"
-                android:foregroundTint="#CB070606"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="20dp"
+            android:background="#C4AAA7A7"
+            android:foregroundTint="#CB070606"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-            <EditText
-                android:id="@+id/subjectEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginTop="80dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/roboto"
-                android:hint="@string/ajouter_un_sujet"
-                android:inputType="textPersonName"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="20dp"
+            android:background="#C4AAA7A7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subjectEdit" />
 
-            <View
-                android:id="@+id/view3"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_marginTop="30dp"
-                android:background="#C4AAA7A7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subjectEdit" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:srcCompat="@drawable/ic_place_black_24dp" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginTop="20dp"
-                android:animateLayoutChanges="false"
-                android:entries="@array/liste_salles"
-                android:spinnerMode="dialog"
-                android:theme="@style/Spinner"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+        <Spinner
+            android:id="@+id/spinner"
+            style="@style/Spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:entries="@array/liste_salles"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <EditText
-                android:id="@+id/emailEdit1"
-                android:layout_width="244dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@android:color/transparent"
-                android:fontFamily="@font/roboto"
-                android:hint="@string/entrez_une_adresse_email"
-                android:inputType="textEmailAddress"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
+        <EditText
+            android:id="@+id/emailEdit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@android:color/transparent"
+            android:drawableStart="@drawable/ic_person_add_black_24dp"
+            android:drawablePadding="20dp"
+            android:fontFamily="@font/roboto"
+            android:hint="@string/entrez_une_adresse_email"
+            android:inputType="textEmailAddress"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
+        <ImageButton
+            android:id="@+id/addParticipant1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:src="@drawable/ic_done_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-            <ImageButton
-                android:id="@+id/addParticipant1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="25dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_done_black_24dp"
-                app:layout_constraintStart_toEndOf="@+id/emailEdit1"
-                app:layout_constraintTop_toBottomOf="@+id/view2"></ImageButton>
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailEdit1" />
 
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/save_button"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="51dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3"
-                app:srcCompat="@drawable/ic_access_time_black_24dp" />
-
-
-            <TextView
-                android:id="@+id/dateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/roboto"
-                android:textColor="#A5A0A0"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/view3"
-                tools:text="21/01/2010" />
-
-            <Spinner
-                android:id="@+id/spinnerHeure"
-                style="@style/Widget.AppCompat.Spinner.Underlined"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@android:color/transparent"
-                android:entries="@array/horaires"
-                android:gravity="center|center_horizontal"
-                android:spinnerMode="dialog"
-                android:theme="@style/Spinner"
-                app:layout_constraintStart_toEndOf="@+id/dateTextView"
-                app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="92dp" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="51dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view"
-                app:srcCompat="@drawable/ic_place_black_24dp" />
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="51dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view2"
-                app:srcCompat="@drawable/ic_person_add_black_24dp" />
-
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="290dp"
-                android:layout_height="259dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/emailEdit1" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
