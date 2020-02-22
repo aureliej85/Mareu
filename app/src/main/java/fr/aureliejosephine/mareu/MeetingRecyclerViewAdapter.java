@@ -20,11 +20,12 @@ import fr.aureliejosephine.mareu.modele.Meeting;
 import androidx.recyclerview.widget.RecyclerView;
 import fr.aureliejosephine.mareu.services.MeetingService;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> implements Filterable {
+public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> /*implements Filterable*/ {
 
     private List<Meeting> list;
     private List<Meeting> listFull;
@@ -95,7 +96,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     /**
      * A filter to sort meetings by room or by date
      */
-    private Filter filterDatePlace = new Filter() {
+    /*private Filter filterDatePlace = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Meeting> filteredList = new ArrayList<>();
@@ -129,7 +130,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     @Override
     public Filter getFilter() {
         return filterDatePlace;
-    }
+    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -137,11 +138,11 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
         @BindView(R.id.image_reunion) public ImageView mImage;
         @BindView(R.id.emailText) public TextView mEmail;
         @BindView(R.id.deleteButton) public ImageButton mDeleteButton;
-        private View layout;
+        //private View layout;
 
         private ViewHolder(View view) {
             super(view);
-            layout = view;
+            //layout = view;
             ButterKnife.bind(this, view);
         }
     }

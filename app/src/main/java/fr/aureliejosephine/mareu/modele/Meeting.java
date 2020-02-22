@@ -1,9 +1,11 @@
 package fr.aureliejosephine.mareu.modele;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
-public class Meeting {
+public class Meeting implements Comparable<Meeting>{
 
     private String room;
     private String subject;
@@ -81,6 +83,12 @@ public class Meeting {
     }
 
 
+    @Override
+    public int compareTo(Meeting o) {
+        if (getDate() == null || o.getDate() == null) {
+            return 0;
+        }
 
-
+        return getDate().compareTo(o.getDate());
+    }
 }

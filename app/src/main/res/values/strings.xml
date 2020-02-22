@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ma réu</string>
+    <string name="app_name">Maréu</string>
     <string name="confirm_delete">Voulez-vous vraiment supprimer cette réunion ?</string>
     <string name="toast_delete">Réunion supprimée !</string>
     <string name="toast_add">Réunion enregistrée !</string>
@@ -17,6 +17,7 @@
     <string name="entrez_une_adresse_email">Entrez une adresse email</string>
     <string name="oui">Oui</string>
     <string name="non">Non</string>
+    <string name="menu_filter">menu_filter</string>
 
     <string-array name="liste_salles">
         <item>Réunion A</item>
