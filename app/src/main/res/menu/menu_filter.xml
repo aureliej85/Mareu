@@ -18,7 +18,7 @@
 
 
             <item
-                android:id="@+id/filter_by_date"
+                android:id="@+id/filter_room"
                 android:title="Filtrer par salle"
                 app:showAsAction="never"/>
 

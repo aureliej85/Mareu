@@ -92,6 +92,8 @@ public class ListMeetingActivity extends AppCompatActivity {
                 return true;
             case R.id.filter_match_date: //performDateFilter(MATCH);
                 return true;
+            case R.id.filter_room: //performDateFilter(MATCH);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
