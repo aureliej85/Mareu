@@ -29,7 +29,6 @@ import com.bumptech.glide.request.RequestOptions;
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> /*implements Filterable*/ {
 
     private List<Meeting> list;
-    private List<Meeting> feedItemList;
     private MeetingService mMeetingService;
     private Context context;
 
@@ -49,7 +48,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        mMeetingService = DI.getMeetingService();
         final Meeting meeting = list.get(position);
 
         String text = context.getString(R.string.title, meeting.getRoom(), meeting.getHour(), meeting.getSubject());
@@ -93,7 +91,6 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     public int getItemCount() {
         return list.size();
     }
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {

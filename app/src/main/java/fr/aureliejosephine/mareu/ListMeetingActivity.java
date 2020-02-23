@@ -41,8 +41,7 @@ public class ListMeetingActivity extends AppCompatActivity {
     private MeetingRecyclerViewAdapter adapter;
     public MeetingService meetingService;
 
-    public List<Meeting> filteredDate = new ArrayList<>();
-    public List<Meeting> filteredRoom = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         meetingService = DI.getMeetingService();
         ButterKnife.bind(this);
         configRecyclerView();
+
 
 
 
@@ -150,7 +150,7 @@ public class ListMeetingActivity extends AppCompatActivity {
                     cal.set(dayOfMonth, month, year);
 
                     String dateChoosen = dayOfMonth + "/" + (month + 1) +"/" + year;
-                    Log.e("TAG: whichDate", "goCalendar: " + " " + dateChoosen);
+                    Log.e("DatePicker", "goCalendar: " + " " + dateChoosen);
                     filterDate(dateChoosen);
                 },
                 calendar.get(Calendar.YEAR),
@@ -162,12 +162,14 @@ public class ListMeetingActivity extends AppCompatActivity {
 
 
     public void filterDate(String date) {
+        List<Meeting> filteredDate = new ArrayList<>();
 
         for (Meeting meet : meetingService.getMeeting()) {
-            if(meet.getDate() == date){
+            if(meet.getDate().trim().equals(date.trim())){
                 filteredDate.add(meet);
                 adapter = new MeetingRecyclerViewAdapter(filteredDate);
                 recyclerView.setAdapter(adapter);
+                Log.e("filterDate", "Loop");
             }
         }
 
@@ -177,16 +179,20 @@ public class ListMeetingActivity extends AppCompatActivity {
 
 
     public void filterRoom(String room) {
+        List<Meeting> filteredRoom = new ArrayList<>();
 
         for (Meeting meet : meetingService.getMeeting()) {
             if(meet.getRoom() == room){
                 filteredRoom.add(meet);
                 adapter = new MeetingRecyclerViewAdapter(filteredRoom);
+                adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
+                Log.e("filterRoom", "Loop ");
             }
         }
 
-        Log.e("filterRoom", "filterRoom: " + room);
+
+        Log.e("filterRoom", "filterRoom: ");
     }
 
 
