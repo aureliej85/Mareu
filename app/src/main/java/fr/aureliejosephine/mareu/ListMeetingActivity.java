@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -157,7 +156,12 @@ public class ListMeetingActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 Log.e("filterDate", "Loop");
+            } else {
+                adapter = new MeetingRecyclerViewAdapter(filteredDate);
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter);
             }
+
         }
 
         Log.e("filterDate", "filterDate: " + date);
@@ -174,6 +178,10 @@ public class ListMeetingActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 Log.e("filterRoom", "Loop ");
+            } else {
+                adapter = new MeetingRecyclerViewAdapter(filteredRoom);
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter);
             }
         }
 
