@@ -27,8 +27,10 @@ public class filteredMeetingListTest {
     @Test
     public void filteredMeetingListShouldShowOnlyOneItem(){
         onView(allOf(withId(R.id.my_recycler_view), isDisplayed()));
-        onView(ViewMatchers.withId(R.id.searchView)).perform(click()).perform(typeText(context.getString(R.string.test_input_date)));
-        //onView(allOf(withId(R.id.my_recycler_view), isDisplayed())).check(withItemCount(1));
-        onView(withId(R.id.roomHourSubjTv)).check(matches(withText(context.getString(R.string.test_subject_input2))));
+        onView(ViewMatchers.withId(R.id.filter)).perform(click());
+        onView(ViewMatchers.withText("Filtrer par salle")).perform(click());
+        onView(ViewMatchers.withText("Réunion A")).perform(click());
+        onView(allOf(withId(R.id.my_recycler_view), isDisplayed()));
+        onView(allOf(withText("Réunion A - 11h00 - Sujet 3"), isDisplayed()));
     }
 }

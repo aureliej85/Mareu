@@ -1,7 +1,6 @@
 package fr.aureliejosephine.mareu;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,14 +31,11 @@ import fr.aureliejosephine.mareu.services.MeetingService;
 
 public class ListMeetingActivity extends AppCompatActivity {
 
-    @BindView(R.id.my_recycler_view)
-    public RecyclerView recyclerView;
-    @BindView(R.id.fab)
-    public FloatingActionButton fabAddMeeting;
+    @BindView(R.id.my_recycler_view)  public RecyclerView recyclerView;
+    @BindView(R.id.fab) public FloatingActionButton fabAddMeeting;
 
     private MeetingRecyclerViewAdapter adapter;
     public MeetingService meetingService;
-
 
 
     @Override
@@ -75,6 +71,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_filter, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -118,7 +115,7 @@ public class ListMeetingActivity extends AppCompatActivity {
                 filterRoom("Réunion J");
                 return true;
             case R.id.sort_date:
-                sortListByTime();
+                sortListByDate();
                 return true;
             case R.id.sort_room:
                 sortListByRoom();
@@ -167,7 +164,6 @@ public class ListMeetingActivity extends AppCompatActivity {
     }
 
 
-
     public void filterRoom(String room) {
         List<Meeting> filteredRoom = new ArrayList<>();
 
@@ -181,7 +177,6 @@ public class ListMeetingActivity extends AppCompatActivity {
             }
         }
 
-
         Log.e("filterRoom", "filterRoom: ");
     }
 
@@ -192,6 +187,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+
     public void sortListByRoom() {
         Collections.sort(meetingService.getMeeting(), (o1, o2) -> {
             adapter.notifyDataSetChanged();
@@ -199,7 +195,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         });
     }
 
-    public void sortListByTime() {
+
+    public void sortListByDate() {
         Collections.sort(meetingService.getMeeting(), (o1, o2) -> {
             adapter.notifyDataSetChanged();
             return o1.getHour().compareTo(o2.getHour());
