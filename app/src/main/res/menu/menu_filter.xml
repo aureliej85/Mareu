@@ -74,6 +74,15 @@
                 </menu>
 
             </item>
+
+            <item
+                android:id="@+id/sort_date"
+                android:title="Trier par date"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/sort_room"
+                android:title="Trier par salle"
+                app:showAsAction="never" />
         </menu>
     </item>
 </menu>

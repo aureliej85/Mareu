@@ -46,6 +46,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
 
     private MeetingService mMeetingService;
 
+    public MeetingRecyclerViewAdapter meetingRecyclerViewAdapter;
+
     private ArrayList<String> list;
     private ArrayAdapter<String> adapter;
     private Context context = AddMeetingActivity.this;
@@ -61,7 +63,7 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
         configSpinnerHour();
         configDateTextView();
         configListView();
-
+        meetingRecyclerViewAdapter = new MeetingRecyclerViewAdapter(mMeetingService.getMeeting());
 
     }
 
@@ -98,6 +100,8 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             Intent intent = new Intent(AddMeetingActivity.this, ListMeetingActivity.class);
             startActivity(intent);
         }
+
+        meetingRecyclerViewAdapter.notifyDataSetChanged();
     }
 
 
@@ -163,7 +167,6 @@ public class AddMeetingActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 list.remove(i);  //click to delete email from the list
-                adapter.notifyDataSetChanged();
                 Toast.makeText(AddMeetingActivity.this, context.getString(R.string.email_supprimé), Toast.LENGTH_LONG).show();
             }
         });

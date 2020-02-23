@@ -16,13 +16,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -50,11 +49,8 @@ public class ListMeetingActivity extends AppCompatActivity {
         meetingService = DI.getMeetingService();
         ButterKnife.bind(this);
         configRecyclerView();
-
-
-
-
     }
+
 
     public void configRecyclerView() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -62,6 +58,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
                 DividerItemDecoration.VERTICAL));
+        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -72,19 +69,6 @@ public class ListMeetingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void sortListByRoom() {
-        Collections.sort(meetingService.getMeeting(), (o1, o2) -> {
-            adapter.notifyDataSetChanged();
-            return o1.getRoom().compareTo(o2.getRoom());
-        });
-    }
-
-    public void sortListByTime() {
-        Collections.sort(meetingService.getMeeting(), (o1, o2) -> {
-            adapter.notifyDataSetChanged();
-            return o1.getHour().compareTo(o2.getHour());
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,7 +86,6 @@ public class ListMeetingActivity extends AppCompatActivity {
                 goCalendar();
                 return true;
             case R.id.filter_match_room:
-                sortListByRoom();
                 return true;
             case R.id.reunion1:
                 filterRoom("Réunion A");
@@ -133,6 +116,12 @@ public class ListMeetingActivity extends AppCompatActivity {
                 return true;
             case R.id.reunion10:
                 filterRoom("Réunion J");
+                return true;
+            case R.id.sort_date:
+                sortListByTime();
+                return true;
+            case R.id.sort_room:
+                sortListByRoom();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -168,6 +157,7 @@ public class ListMeetingActivity extends AppCompatActivity {
             if(meet.getDate().trim().equals(date.trim())){
                 filteredDate.add(meet);
                 adapter = new MeetingRecyclerViewAdapter(filteredDate);
+                adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 Log.e("filterDate", "Loop");
             }
@@ -182,7 +172,7 @@ public class ListMeetingActivity extends AppCompatActivity {
         List<Meeting> filteredRoom = new ArrayList<>();
 
         for (Meeting meet : meetingService.getMeeting()) {
-            if(meet.getRoom() == room){
+            if(meet.getRoom().trim().equals(room.trim())){
                 filteredRoom.add(meet);
                 adapter = new MeetingRecyclerViewAdapter(filteredRoom);
                 adapter.notifyDataSetChanged();
@@ -199,7 +189,23 @@ public class ListMeetingActivity extends AppCompatActivity {
     public void init(){
         adapter = new MeetingRecyclerViewAdapter(meetingService.getMeeting());
         recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
+
+    public void sortListByRoom() {
+        Collections.sort(meetingService.getMeeting(), (o1, o2) -> {
+            adapter.notifyDataSetChanged();
+            return o1.getRoom().compareTo(o2.getRoom());
+        });
+    }
+
+    public void sortListByTime() {
+        Collections.sort(meetingService.getMeeting(), (o1, o2) -> {
+            adapter.notifyDataSetChanged();
+            return o1.getHour().compareTo(o2.getHour());
+        });
+    }
+
 
 
 
